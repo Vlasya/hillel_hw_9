@@ -6,7 +6,7 @@
 // Вынести людей с одинаковым именем в отдельный массив.
 
 let nameArr=['Колюсик','Валентинчик','Галечка','Олечка','Оксанка','Степка'];
-let arrPeople= [];
+
 
 //  Нет в ТЗ,но так интереснее. Рандомные имена
 function getRandomName(arr){
@@ -28,23 +28,69 @@ function getPerson(name, from, to){
 }
 
 // Человечий массив с рандомными именами и возрастом
+function getArrPeople(){
+	let  arr=[]
 	for(let i=0;i<5;i++){
-		arrPeople.push(getPerson(getRandomName(nameArr),3,70))
+		arr.push(getPerson(getRandomName(nameArr),3,70))
 	}
+	return arr
+}
 	
-	let averageAge=0;
-	let maxAge=0;
-	arrPeople.forEach(function(item,index,arr){
-		console.log('item: ', item.age);
-		averageAge+=Math.ceil(item.age/arr.length)
-		maxAge=Math.max(item.age)
 
-		return averageAge,maxAge
+// функция,которая возвращает средний возраст толпы
+function averageAge(arr){
+		let verage=0;
+		arr.map((item) =>verage+=item.age);
+		return  verage/arr.length
+	}
+
+//  Вычисляем старенького
+ function old(arr){
+	let a=[];
+		arr.map((item) =>{
+			return a.push(item.age)
 	})
-console.log(averageAge);
-console.log(maxAge);
-console.log('Человечий массив ', arrPeople);
+	return a=Math.max(...a)
+ }
+
+// Вычисляем одноименцев
+
+function theSameName(arr){
+	let objName;
+	let same=[]
+	arr.forEach(function(item){
+		objName=item.name
+		console.log(objName);
+		same=arr.map(function(el){
+			if(objName===el.name){
+				return el}
+			
+			})
+		
+	})
+	return same
+}
+
+	// ----------------------------------------------------------------------
+	
+	console.log('---------------1-------------------');
+
+	let arrPeople = getArrPeople();
+	console.log('Человечий массив ', arrPeople);
+
+	console.log('---------------2-------------------');
+
+	let averageAg=averageAge(arrPeople);
+	console.log('Средний возраст человечков: ', averageAg);
+
+	let oldPerson= old(arrPeople);
+	console.log(oldPerson);
+
+	console.log('---------------3-------------------');
 
 
+
+
+console.log(theSameName(arrPeople));
 
  
