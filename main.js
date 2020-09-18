@@ -56,19 +56,17 @@ function averageAge(arr){
 // Вычисляем одноименцев
 
 function theSameName(arr){
-	let objName;
-	let same=[]
-	arr.forEach(function(item){
-		objName=item.name
-		console.log(objName);
-		same=arr.map(function(el){
-			if(objName===el.name){
-				return el}
-			
-			})
-		
-	})
-	return same
+	let count=arr.reduce(function(prev,item){
+		prev[item.name]=(prev[item.name] || 0)+1;
+		return  prev
+},{})
+
+
+let same= arr.filter(function(obj){
+return count[obj.name]>1
+})
+
+return same
 }
 
 	// ----------------------------------------------------------------------
@@ -84,13 +82,10 @@ function theSameName(arr){
 	console.log('Средний возраст человечков: ', averageAg);
 
 	let oldPerson= old(arrPeople);
-	console.log(oldPerson);
+	console.log('Возраст самого старого человек: ',oldPerson);
 
 	console.log('---------------3-------------------');
 
+	let sameN=theSameName(arrPeople)
+	console.log('Людишки с одиковыми именами: ', theSameName(arrPeople));
 
-
-
-console.log(theSameName(arrPeople));
-
- 
